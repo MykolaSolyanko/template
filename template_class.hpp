@@ -5,6 +5,7 @@ template <class /*typename*/ T = int>
 class Stack {
  public:
   Pair push(T value) {
+    std::static_assert(std::is_same<T, U>::value);
     Pair res {false, ""};
     if (nullptr == array) {
       res.msg = "Stack is not allocated";

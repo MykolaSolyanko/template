@@ -1,10 +1,14 @@
 #pragma once
 #include "common_type.hpp"
 
+#include <type_traits>
+
 template <class /*typename*/ T, unsigned SIZE>
 class Stack {
  public:
-  Pair push(T value) {
+  template <typename U>
+  Pair push(U value) {
+    static_assert(std::is_same<T, U>::value, " Not equal parameter");
     Pair res {false, ""};
     if (nullptr == array) {
       res.msg = "Stack is not allocated";
@@ -68,7 +72,9 @@ Template specialization
 template <class /*typename*/ T, unsigned SIZE>
 class Stack <T*, SIZE> {
  public:
-  Pair push(T value) {
+  template <typename U>
+  Pair push(U value) {
+    static_assert(std::is_same<T, U>::value, "Not equal parameter");
     Pair res {false, ""};
     if (nullptr == array) {
       res.msg = "Stack is not allocated";

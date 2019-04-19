@@ -9,3 +9,8 @@ struct Value {
   bool status;
   int value;
 };
+
+template<typename R, typename T>
+R convert(T value) {
+  return static_cast<R> (value);
+}
